@@ -41,7 +41,6 @@ public class MyHandler implements Handler{
                 retriesCount++;
             }
 
-            // Проверяем, превысили ли мы общий таймаут
             if (System.currentTimeMillis() - startTime >= timeout.toMillis()) {
                 return new ApplicationStatusResponse.Failure(null, retriesCount);
             }
@@ -52,8 +51,7 @@ public class MyHandler implements Handler{
         try {
             Thread.sleep(delay.toMillis());
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            // Можно обработать прерывание здесь, если необходимо
+            System.out.println(String.format("Exception while processing {}", e));
         }
     }
 
